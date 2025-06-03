@@ -10,3 +10,9 @@
   - Billy: backend
   - Rachel: Frontend
   - Caleb: Databasing
+
+
+## TODO list
+
+  - Design a detailed project plan
+  - Start the project
