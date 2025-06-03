@@ -6,8 +6,8 @@
 
 ## Responsibilities
 
-  - Anton:  authentication and security
-  - Billy: backend
+  - Anton:  Authentication and security
+  - Billy: Backend
   - Rachel: Frontend
   - Caleb: Databasing
 
