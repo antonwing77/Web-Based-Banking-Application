@@ -1,4 +1,4 @@
-# Web-Based-Banking-Application
+# Web Based Banking Application
 
 ## Description:
 
@@ -6,7 +6,7 @@
 
 ## Responsibilities
 
-  - Anton:  Authentication and security
+  - Anton:  Authentication and Security
   - Billy: Backend
   - Rachel: Frontend
   - Caleb: Databasing
