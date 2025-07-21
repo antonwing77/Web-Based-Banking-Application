@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate
+from django.contrib.auth.hashers import make_password
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -6,6 +7,7 @@ from django.utils import timezone
 from datetime import timedelta
 from .models import CustomUser
 import re
+import psycopg2
 
 MAX_ATTEMPTS = 5
 LOCKOUT_MINUTES = 15
@@ -20,6 +22,8 @@ class RegisterView(APIView):
         password = request.data.get('password')
         first_name = request.data.get('first_name')
         last_name = request.data.get('last_name')
+        taxID = request.data.get('taxID')
+        dob = request.data.get('dob')
         email = request.data.get('email')
         phone = request.data.get('phone')
         address = request.data.get('address')
@@ -30,8 +34,53 @@ class RegisterView(APIView):
         if not validate_password(password):
             return Response({'detail': 'Password must be at least 8 characters, include one uppercase letter and one number.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        if CustomUser.objects.filter(username=username).exists():
-            return Response({'detail': 'Username already exists.'}, status=status.HTTP_400_BAD_REQUEST)
+        # Trying to connect to SQL database
+        try:
+            conn = psycopg2.connect(
+                dbname='postgres',
+                user='postgres',
+                password='!12345',
+                host='localhost',
+                port='5432'
+            )
+            cur = conn.cursor()
+        
+            # Checking if username is already in database
+            cur.execute("SELECT * FROM users WHERE username=%s", (username,))
+            if cur.fetchone():
+                return Response({'detail': 'Username already exists.'}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Checking if username is already in CustomUser object
+            if CustomUser.objects.filter(username=username).exists():
+                return Response({'detail': 'Username already exists.'}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Hashing password
+            hashed_pass = make_password(password)
+
+            # Insert data into users table
+            # Returns auto-incrementing user_id to use in client table
+            cur.execute("INSERT INTO users (username, password, user_role) VALUES (%s, %s, %s) RETURNING user_id",
+                        (username, hashed_pass, 'client')) 
+
+            user_id = cur.fetchone()[0]
+
+            # Insert data into client table
+            cur.execute('''
+                INSERT INTO client (
+                    user_id, first_name, last_name, address, city, state, zipcode, date_of_birth, email, phone_number, tax_id)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''', 
+                    (user_id, first_name, last_name, address, city, state, zip_code, dob, email, phone, taxID))
+
+            conn.commit()
+            cur.close()
+            conn.close()
+
+            return Response({'detail': 'Registration successful.'}, status=status.HTTP_201_CREATED)
+        
+        except Exception as e:
+            print("Error: ", e)
+            return Response({'detail': 'Server error.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            
 
         user = CustomUser.objects.create_user(
             username=username,
@@ -47,7 +96,7 @@ class RegisterView(APIView):
         # user.state = state
         # user.zip_code = zip_code
         user.save()
-        return Response({'detail': 'Registration successful.'}, status=status.HTTP_201_CREATED)
+
 
 class LoginView(APIView):
     def post(self, request):
