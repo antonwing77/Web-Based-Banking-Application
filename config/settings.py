@@ -57,6 +57,7 @@ REST_FRAMEWORK = {
 }
 # (anton's comment) will add the following line to middleware when the rest of the audit logging is complete
 # 'audit.middleware.AuditUserMiddleware',
+# updated I added it
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -65,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'audit.middleware.AuditUserMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
