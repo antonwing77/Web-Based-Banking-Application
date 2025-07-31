@@ -53,3 +53,8 @@ Account - Admins can create new accounts, can view all accounts, update any acco
 Debit Card - Admins can issue a new card, can view and update a cards data, and can delete a card.
 Transactions - Admins can view all transactions and can update them.
 
+## Frontend and Backend
+run "python manage.py runserver" to set up the backend
+run these lines in a seperate terminal to set up the frontend
+"cd frontend
+npm start"
