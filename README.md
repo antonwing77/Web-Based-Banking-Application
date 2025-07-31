@@ -8,7 +8,7 @@
 
   - Anton:  Authentication and Security and Frontend
   - Billy: Backend
-  - Rachel: Did some frontend stuff
+  - Rachel: frontend
   - Caleb: Databasing
 
 ## TODO list
