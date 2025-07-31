@@ -2,15 +2,14 @@
 
 ## Description
 
-  A web-based banking application with three roles: customers, tellers, and admin. The application would allow for account management such as checking balances, making deposits and withdrawals, and transferring funds with other users. Tellers would be able to open accounts and flag transactions, and admin would be able to do system edits and check the logs. We will use Python, SQL, and React.
+  A web-based banking application with three roles: customers, tellers, and admin. The application would allow for account management such as checking balances, making deposits and withdrawals, and transferring funds with other users. Tellers would be able to open accounts and flag transactions, and admin would be able to do system edits, delete transactions, and check the logs. We will use Python, SQL, Java, and React.
 
 ## Responsibilities
 
-  - Anton:  Authentication and Security
+  - Anton:  Authentication and Security and Frontend
   - Billy: Backend
-  - Rachel: Frontend
+  - Rachel: Did some frontend stuff
   - Caleb: Databasing
-
 
 ## TODO list
 
@@ -53,3 +52,4 @@ Client - Admins can create new client profiles, can view all client records, can
 Account - Admins can create new accounts, can view all accounts, update any account field (except for client id and account id, and delete any account
 Debit Card - Admins can issue a new card, can view and update a cards data, and can delete a card.
 Transactions - Admins can view all transactions and can update them.
+

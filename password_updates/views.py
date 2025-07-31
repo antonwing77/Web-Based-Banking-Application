@@ -116,7 +116,6 @@ class LoginView(APIView):
         user_auth = authenticate(username=username, password=password)
         if user_auth is not None:
             user.reset_attempts()
-            # ...token/session logic here
             return Response({'role': getattr(user, "role", "Client"), 'detail': 'Login successful.'})
         else:
             user.failed_attempts += 1

@@ -13,8 +13,6 @@ function Register() {
         password: '',
         firstName: '',
         lastName: '',
-        taxID: '',
-        dob: '',
         email: '',
         phone: '',
         address: '',
@@ -48,8 +46,6 @@ function Register() {
                     password: form.password,
                     first_name: form.firstName,
                     last_name: form.lastName,
-                    taxID: form.taxID,
-                    dob: form.dob,
                     email: form.email,
                     phone: form.phone,
                     address: form.address,
@@ -66,8 +62,6 @@ function Register() {
                     password: '',
                     firstName: '',
                     lastName: '',
-                    taxID: '',
-                    dob: '',
                     email: '',
                     phone: '',
                     address: '',
@@ -79,7 +73,7 @@ function Register() {
                 setError(data.detail || 'Registration failed.');
             }
         } catch (err) {
-            setError(err?.message || 'Server error.');
+            setError('Server error.');
         }
     };
 
@@ -87,18 +81,16 @@ function Register() {
         <div className='form-container'>
             <h2>Register</h2>
             <form onSubmit={handleSubmit} autoComplete="off">
-                <input type="text" maxlength="50" name="username" placeholder="Username" value={form.username} onChange={handleChange} required />
-                <input type="password" maxlength="100" name="password" placeholder="Password" value={form.password} onChange={handleChange} required />
-                <input type="text" maxlength="100" name="firstName" placeholder="First Name" value={form.firstName} onChange={handleChange} required />
-                <input type="text" maxlength="100" name="lastName" placeholder="Last Name" value={form.lastName} onChange={handleChange} required />
-                <input type="text" pattern="[0-9]{9}" maxlength="9" name="taxID" placeholder="SSN" value={form.taxID} onChange={handleChange} required />
-                <input type="date" name="dob" value={form.dob} onChange={handleChange} required />
-                <input type="email" maxlength="100" name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
+                <input type="text" name="username" placeholder="Username" value={form.username} onChange={handleChange} required />
+                <input type="password" name="password" placeholder="Password" value={form.password} onChange={handleChange} required />
+                <input type="text" name="firstName" placeholder="First Name" value={form.firstName} onChange={handleChange} required />
+                <input type="text" name="lastName" placeholder="Last Name" value={form.lastName} onChange={handleChange} required />
+                <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
                 <input type="tel" name="phone" placeholder="Phone Number" value={form.phone} onChange={handleChange} required />
-                <input type="text" maxlength="100" name="address" placeholder="Address" value={form.address} onChange={handleChange} required />
-                <input type="text" maxlength="30" name="city" placeholder="City" value={form.city} onChange={handleChange} required />
-                <input type="text" maxlength="30" name="state" placeholder="State" value={form.state} onChange={handleChange} required />
-                <input type="text" maxlength="10" name="zip" placeholder="Zip Code" value={form.zip} onChange={handleChange} required />
+                <input type="text" name="address" placeholder="Address" value={form.address} onChange={handleChange} required />
+                <input type="text" name="city" placeholder="City" value={form.city} onChange={handleChange} required />
+                <input type="text" name="state" placeholder="State" value={form.state} onChange={handleChange} required />
+                <input type="text" name="zip" placeholder="Zip Code" value={form.zip} onChange={handleChange} required />
                 {error && <p className='error'>{error}</p>}
                 {success && <p className='success'>{success}</p>}
                 <div>
