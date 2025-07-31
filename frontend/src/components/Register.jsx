@@ -38,7 +38,7 @@ function Register() {
 
         // Submit to backend (adjust URL as needed)
         try {
-            const response = await fetch('http://localhost:8000/api/register/', {
+            const response = await fetch('http://localhost:8000/api/users/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

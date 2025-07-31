@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'authentication.apps.AuthenticationConfig',
     'transactions.apps.TransactionsConfig',
-    'clients.apps.ClientsConfig'
+    'clients.apps.ClientsConfig',
+    'debitcards.apps.DebitcardsConfig',
 ]
 
 AUTH_USER_MODEL = 'authentication.User'
