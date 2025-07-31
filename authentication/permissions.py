@@ -30,3 +30,12 @@ class IsTellerOrAdmin(BasePermission):
             return False
         
         return getattr(request.user, 'role', None) in ('teller', 'admin')
+    
+class IsClient(BasePermission):
+    def has_permission(self, request, view):
+        user = request.user
+
+        if not user or not user.is_authenticated:
+            return False
+        
+        return getattr(request.user, 'role', None) == 'client'
